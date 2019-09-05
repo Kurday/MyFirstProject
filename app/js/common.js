@@ -1,3 +1,4 @@
+// клик по ссылки для плавного скрола к назначеному id
 $(function() {
   $("#js-get-started").on("click", function(e){
     e.preventDefault();
@@ -12,6 +13,7 @@ $(function() {
 var mainH = $("#js-main").height(),
     navH = $("#js-nav-container").innerHeight();
 
+// функция для закрепления меню при скроле больше высоты экрана
 $(document).on("scroll", function(){
   var documentScroll = $(this).scrollTop();
   if (documentScroll > mainH) {
@@ -22,3 +24,13 @@ $(document).on("scroll", function(){
     $("#js-main").removeAttr("style");
   }
 });
+
+$("#js-nav a").on("click", function(e){
+  e.preventDefault();
+  var currentBlock = $(this).attr("href"),
+      currentBlockOffset = $(currentBlock).offset().top;
+
+ $("html, body").animate({
+      scrollTop: currentBlockOffset + 10
+    }, 500);
+}); 
